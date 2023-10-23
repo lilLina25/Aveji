@@ -1,0 +1,1117 @@
+@import "nullstyle.scss";
+//<Шрифты>
+@font-face{
+font-family: "HelveticaBold";
+src: url("../fonts/Helvetica-Bold.ttf") format("truetype");
+font-style: normal; 
+font-weight: normal; 
+}
+//<Переменные шрифтов>
+$helvbold:"HelveticaBold";
+
+//<Миксины>
+@mixin anim($time, $delay){-webkit-transition:all $time ease $delay; -moz-transition: all $time ease $delay; -ms-transition:all $time ease $delay;-o-transition: all $time ease $delay; transition: all $time ease $delay;}
+@mixin scale($num){-webkit-transform:scale($num);-moz-transform:scale($num);
+	-ms-transform:scale($num);-o-transform:scale($num);transform:scale($num);}
+@mixin rotate($deg){-webkit-transform:rotate($deg);-moz-transform:rotate($deg);-ms-transform:rotate($deg);-o-transform:rotate($deg);transform:rotate($deg);}
+@mixin flexbox(){display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex; font-size: 0;}
+@mixin underline($num,$direction, $time, $delay){
+	-webkit-transform:scaleX($num);-moz-transform:scaleX($num);
+	-ms-transform:scaleX($num);-o-transform:scaleX($num); transform: scaleX($num);
+	-webkit-transform-origin: $direction;-moz-transform-origin: $direction;
+	-ms-transform-origin: $direction;-o-transform-origin: $direction; transform-origin: $direction;
+	-webkit-transition:transform $time ease $delay; -moz-transition: transform $time ease $delay; 
+	-ms-transition:transform $time ease $delay;-o-transition: transform $time ease $delay; transition: transform $time ease $delay;
+}
+@mixin grow($num,$direction, $time, $delay){
+	-webkit-transform:scaleY($num);-moz-transform:scaleY($num);
+	-ms-transform:scaleY($num);-o-transform:scaleY($num); transform: scaleY($num);
+	-webkit-transform-origin: $direction;-moz-transform-origin: $direction;
+	-ms-transform-origin: $direction;-o-transform-origin: $direction; transform-origin: $direction;
+	-webkit-transition:transform $time ease $delay; -moz-transition: transform $time ease $delay; 
+	-ms-transition:transform $time ease $delay;-o-transition: transform $time ease $delay; transition: transform $time ease $delay;
+}
+//<Переменные>
+$minwidth: 320px;
+$mw: 1440px;
+
+$md1: $mw+6px;
+$md2: 1090.98px;
+$md3: 767.98px;
+$md4: 500.98px;
+
+//<Оболочка>
+.wrapper{
+	width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+}
+//<Основная сетка>
+.container{
+	max-width: $mw;
+	width: 100%;
+	margin:0 auto;
+	padding: 0 32px;
+	@media(max-width: $md1){max-width: 970px;}
+	@media(max-width: $md2){max-width: 750px; padding: 0;}
+	@media(max-width: $md3){max-width: 520px;}
+	@media(max-width: $md4){max-width: none; padding: 0 6px;}
+}
+
+//<Headerblock>
+.header {
+	margin: 0 0 38px 0;
+	@media(max-width: $md3){
+		position: fixed;
+		z-index: 3;
+		background-color: #FFFFFF;
+		width: 100%;
+		height: 70px;
+	}
+	@media(max-width: $md4){
+		height: 50px;
+	}
+	&__content {
+			@include flexbox();
+			flex-wrap: wrap;
+			margin: 14px 0 0 0;
+			@media(max-width: $md3){
+				margin:0;
+			}
+	}
+	&__column {
+		@include flexbox();
+		font-size: 18px;
+		&:nth-child(1){
+			flex: 1 1 67.3%;
+			@media(max-width: $md2){
+				flex: 1 1 50%;
+			}
+			@media(max-width: $md3){
+				//flex: 1 1 50%;
+			}
+		}
+		&:nth-child(2){
+			flex: 1 1 10%;
+		}
+		&:nth-child(3){
+			flex: 1 1 22%;
+			@media(max-width: $md1){
+				flex: 1 1 20%;
+			}
+			@media(max-width: $md3){
+				display: none;
+			}
+		}
+	}
+	&__logo {
+		font-size: 78px;
+		margin: -3px 0 0 0;
+		@media(max-width: $md4){
+			font-size: 45px;
+			margin: 5px 0 0 0;
+		}
+	}
+	&__phone {
+		margin: 0 0 0 54.3%;
+		@media(max-width: $md1){
+			margin: 0 0 0 20%;
+		}
+		@media(max-width: $md3){
+			margin: 0;
+		}
+	}
+}
+.menu-header {
+	&__circle{
+		display: none;
+		position: fixed;
+		top: 10px;
+		right: 15px;
+		width:45px;
+		height: 45px;
+		border-radius:50%;
+		background-color: #FFF;
+		z-index: 3;
+		@media(max-width: $md3){
+			display: block;
+		}
+		@media(max-width: $md4){
+			top: 1px;
+			right: 13px;
+			width:45px;
+			height: 45px;
+		}
+		&:hover{
+			border: 1px solid #ECECEC;
+			@include anim(0.3s,0s);
+		}
+	}
+	&__icon {
+		display:none;
+		position: fixed;
+		top: 22px;
+		right: 23px;
+		width: 30px;
+		height: 18px;
+		cursor:pointer;
+		z-index: 3;
+		@media(max-width: $md3){
+			display: block;
+		}
+		@media(max-width: $md4){
+			top: 14px;
+			right: 23px;
+			width: 26px;
+		}
+		span{
+			@include anim(0.3s,0s);
+			top:8px;
+			left: 0px;
+			position:absolute;
+			width:100%;
+			height: 2px;
+			background-color: #000;
+			&:first-child{top:0px;}
+			&:last-child{top:auto;bottom:0px; width:50%; left: 50%;}
+		}
+		&.active{
+			span{
+				@include scale(0);
+				&:first-child{
+					@include rotate(-45deg);
+					top:8px;
+				}
+				&:last-child{
+					@include rotate(45deg);
+					bottom:8px;
+					width: 100%;
+					left:0;
+				}
+			}
+		}
+	}
+			
+	&__menu {
+		@media(max-width: $md3){
+			position: relative;
+			left: 1000px;
+		}
+	}
+	&__list {
+
+	}
+	&__link {
+		display: inline-block;
+		margin: 0 0 11px 0;
+		position:relative;
+		top:0;
+		left:0;
+		&::before{
+			content:"";
+			width: 100%;
+			height: 1px;
+			background-color: #212529;
+			position:absolute;
+			top:20px;
+			left:0;
+			@include underline(0,right, 0.25s, 0s);
+			@media(max-width: $md3){
+				top:50px;
+			}
+			@media(max-width: $md4){
+				top:40px;
+			}
+		}
+		&:hover{
+			color: #DDD7C0;
+			&::before{
+				@include underline(1,left, 0.25s, 0s);
+				background-color: #DDD7C0;
+			}
+		}
+		&:active{
+			color:#CBC6B2;
+			&::before{
+				@include underline(1,left, 0.25s, 0s);
+				background-color: #CBC6B2;
+			}
+		}
+	}
+}
+//<Дополнительные классы для Header>
+.activeheader{
+	@media(max-width: $md3){
+		position: fixed;
+		top:0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(33, 37, 41, 0.55);
+		z-index: 2;
+		ul{
+			position: fixed;
+			top:0;
+			left: 35%;
+			width: 65%;
+			height: 100%;
+			background-color: #ECECEC;
+			@include flexbox();
+			flex-direction: column;
+			font-size: 30px;
+			line-height: 60px;
+			padding: 0px 0 0 30px;
+			@media(max-width: $md4){
+			line-height: 40px;
+			left: 10%;
+			width: 90%;
+			}
+			&::before{
+				content:"";
+				background: url("../img/logo.svg") no-repeat;
+				width: 200px;
+				height: 110px;
+			}
+		}
+	}
+}
+
+//<Mainblock>
+.mainblock {
+	margin: 0 0 126px 0;
+	@media(max-width: $md2){
+		margin: 0px 0 70px 0;
+	}
+	@media(max-width: $md3){
+		margin: 100px 0 50px 0;
+	}
+	@media(max-width: $md4){
+		margin: 70px 0 56px 0;
+	}
+	&__body {
+	}
+	&__title {
+		width: 54%;
+		margin: 0 0 14px 0;
+		font-size: 72px;
+		line-height: 120%;
+		text-transform: uppercase;
+		@media(max-width: $md1){
+			width: 70%;
+			font-size: 60px;
+		}
+		@media(max-width: $md2){
+			font-size: 48px;
+		}
+		@media(max-width: $md3){
+			width: 100%;
+		}
+		@media(max-width: $md4){
+			width: 105%;
+			font-size: 32px;
+			margin: 0;
+		}
+
+	}
+	&__subtitle {
+		width: 30%;
+		font-size: 20px;
+		line-height: 140%;
+		@media(max-width: $md2){
+			line-height: 120%;
+			width: 40%;
+		}
+		@media(max-width: $md3){
+			width: 100%;
+		}
+		@media(max-width: $md4){
+			font-size: 16px;
+			line-height: 140%;
+			width: 90%;
+		}
+		p{
+			
+		}
+	}
+	&__button {
+		display: inline-block;
+		position: relative;
+		top:-42px;
+		left: 88%;
+		@media(max-width: $md1){
+			left: 81%;
+		}
+		@media(max-width: $md2){
+			left: 78%;
+		}
+		@media(max-width: $md3){
+			top:110px;
+			left:0;
+		}
+		@media(max-width: $md4){
+			top:120px;
+			left:0;
+		}
+
+		p{
+			font-size: 18px;
+			text-transform: uppercase;
+		}
+		&::before{
+			content:"";
+			width: 100%;
+			height: 1px;
+			background-color: #212529;
+			position: absolute;
+			top:20px;
+			left: 0;
+			@include underline(1,right, 0.25s, 0s);
+		}
+		&:hover{
+			a{
+			color: #DDD7C0;
+			}
+			&::before{
+				@include underline(0,left, 0.25s, 0s);
+				background-color: #DDD7C0;
+			}
+		}
+		&:active{
+			a{
+			color: #CBC6B2;
+			}
+			&::before{
+				@include underline(0,left, 0.25s, 0s);
+				background-color: #CBC6B2;
+			}
+		}
+	}
+	&__link {
+	}
+	&__content{
+	}
+	&__imageblock {
+		@include flexbox();
+		justify-content: space-between;
+		align-items: flex-end;
+		margin: -84px 0 0 0;
+		@media(max-width: $md1){
+			margin: -132px 0 0 0;
+		}
+		@media(max-width: $md2){
+			margin: -92px 0 0 0;
+		}
+		@media(max-width: $md3){
+			margin: 60px 0 0 0;
+			justify-content: strech;
+			align-items:center;
+		}
+		@media(max-width: $md4){
+			margin: 70px 0 0 0;
+		}
+		img{
+			max-width: 100%;
+		}
+	}
+	&__imgsmall {
+		@media(max-width: $md1){
+			width: 30%;
+		}
+		@media(max-width: $md3){
+			display: none;
+		}
+	}
+	&__imgbig {
+		@media(max-width: $md1){
+			width: 58%;
+		}
+		@media(max-width: $md3){
+			width: 90%;
+			height: 450px;
+			overflow: hidden;
+		}
+		@media(max-width: $md4){
+			width: 87%;
+			height: 261px;
+		}
+		img{
+			@media(max-width: $md3){
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				@media(max-width: $md4){
+					object-position: 0 60%;
+				}
+			}
+		}
+	}
+}
+
+//<Aboutblock>
+.aboutblock {
+	margin: 0 0 100px 0;
+	@media(max-width: $md3){
+		margin: 0 0 48px 0;
+	}
+	@media(max-width: $md4){
+		margin: 0 0 32px 0;
+	}
+	&__body {
+		@include flexbox();	
+	}
+	&__title {
+		font-size: 48px;
+		width: 35%;
+		line-height: 130%;
+		@media(max-width: $md1){
+			width: 50%;
+		}
+		@media(max-width: $md3){
+			display: none;
+		}
+	}
+	&__content {
+		width:31%;
+		margin: 1.5% 0 0 15.5%;
+		@media(max-width: $md1){
+			width: 50%;
+			margin: 1% 0 0 5.5%;
+		}
+		@media(max-width: $md3){
+			width: 95%;
+			margin: 0;
+		}
+		@media(max-width: $md4){
+			width: 80%;
+		}
+	}
+	&__hidden {
+		display: none;
+		@media(max-width: $md3){
+			display: block;
+			font-size: 35px;
+			margin: 0 0 20px 0;
+		}
+		@media(max-width: $md4){
+			font-size: 28px;
+		}
+	}
+	&__textblock {
+		font-size: 16px;
+		line-height: 140%;
+		margin:  0 0 54px 0;
+		@media(max-width: $md1){
+			margin:  0 0 34px 0;
+		}
+		@media(max-width: $md3){
+			margin:  0 0 38px 0;
+		}
+		p{
+			margin: 0 0 16px 0;
+			&:last-child{
+				margin:0;
+			}
+		}
+	}
+	&__factsblock {
+
+	}
+	&__fact {
+		width: 35%;
+		margin: 0 0 32px 0;
+		@media(max-width: $md3){
+			width: 65%;
+			margin: 0 0 22px 0;
+		}
+		@media(max-width: $md4){
+			width: 50%;
+		}
+	}
+	&__facttitle {
+		font-size: 36px;
+		margin: 0 0 5px 0;
+		@media(max-width: $md3){
+			font-size: 24px;
+		}
+	}
+	&__facttext {
+		font-size: 16px;
+		line-height: 140%; 
+	}
+}
+
+//<Stepsblock>
+.stepsblock {
+	margin: 0 0 106px 0px;
+	@media(max-width: $md4){
+		margin: 0 0 38px 0;
+	}
+	&__body {
+		@include flexbox();
+		@media(max-width: $md2){
+			flex-direction: column;
+		}
+	}
+	&__title {
+		font-size: 48px;
+		width: 52%;
+		@media(max-width: $md2){
+			width: 95%;
+			margin: 0 0 20px 0;
+		}
+		@media(max-width: $md3){
+			font-size: 38px;
+		}
+		@media(max-width: $md4){
+			font-size: 28px;
+		}
+		
+	}
+	&__content {
+		margin: 8px 0 0 0;
+		width: 50%;
+		@media(max-width: $md1){
+			width: 65%;
+		}
+		@media(max-width: $md2){
+			width: 100%;
+		}
+		@media(max-width: $md3){
+			margin: 4px 0 0 0;
+			width: 90%;
+		}
+	}
+	&__subtitle {
+		width: 44%;
+		margin: 0 0 46px 0;
+		font-size: 16px;
+		line-height: 140%;
+		@media(max-width: $md1){
+			width: 60%;
+		}
+		@media(max-width: $md2){
+			width: 100%;
+			margin: 0 0 28px 0;
+		}
+		@media(max-width: $md4){
+			margin: 0 0 30px 0;
+		}
+	}
+	&__steps {
+		margin: 0 0 0 -6px;
+		@media(max-width: $md2){
+			margin:0;
+		}
+	}
+	&__step {
+		@include flexbox();
+		position: relative;
+		top:0;
+		left:0;
+		@media(max-width: $md4){
+			flex-direction: column;
+		}
+		&::before{
+			content:"";
+			width: 100%;
+			height: 1px;
+			background-color: #000;
+			position: absolute;
+			top: 84.5%;
+			left:0;
+			@media(max-width: $md4){
+				top:88%;
+			}
+		}
+	}
+	&__steptitle {
+		font-size: 36px;
+		line-height: 140%;
+		width: 50%;
+		@media(max-width: $md4){
+			font-size: 24px;
+			width:100%;
+		}
+		h3{
+			width:80%;
+			@media(max-width: $md4){
+				width: 100%;
+			}
+		}
+	}
+	&__text {
+		width: 49%;
+		font-size: 16px;
+		line-height: 140%;
+		margin: 8px 0 50px 10px;
+		@media(max-width: $md4){
+			width: 100%;
+			margin: 12px 0 32px 2px;
+		}
+	}
+}
+
+//<Projectblock>
+.projectblock {
+	margin: 0 0 134px 0;
+	@media(max-width: $md4){
+		margin: 0 0 58px 0;
+	}
+	&__body {
+	}
+	&__title {
+		font-size: 48px;
+		margin: 0 0 38px 0;
+		@media(max-width: $md4){
+			font-size: 28px;
+			margin: 0 0 22px 0;
+		}
+	}
+	&__content{
+		width: 100%;
+		@media(max-width: $md3){
+			width: 440px;
+		}
+		@media(max-width: $md4){
+			width: 233px;
+		}
+	}
+	&__swiper {
+		@include flexbox();
+		flex-wrap:wrap;
+		@media(max-width: $md3){
+			flex-wrap: nowrap;
+			min-width: 0;
+		}
+	}
+	&__project {
+		flex: 0 1 32.333%;
+		min-width: 0;
+		margin: 0 0 20px 20px;
+		position: relative;
+		top:0;
+		left:0;
+		overflow: hidden;
+		cursor:pointer;
+		@media(max-width: $md1){
+			flex: 0 1 31.333%;
+		}
+		@media(max-width: $md3){
+			flex:1 0 100%;
+			margin:0 0 0 5%;
+		}
+
+		&:nth-child(1){
+			margin:0 0 20px 0;
+			@media(max-width: $md3){
+			flex:1 0 100%;
+			margin:0;
+			}
+		}
+		&:nth-child(2){
+			&::before{
+			content:"Кухонный гарнитур";
+			}
+		}
+		&:nth-child(3){
+			&::before{
+			content:"Диван";
+			}
+		}
+		&:nth-child(4){
+			margin:0px;
+			@media(max-width: $md3){
+				margin:0 0 0 5%;
+			}
+			&::before{
+			content:"Обувница";
+			}
+		}
+		&:nth-child(5){
+			&::before{
+			content:"Кровать";
+			}
+		}
+		&:nth-child(6){
+			&::before{
+			content:"Комод";
+			}
+		}
+		&:nth-child(5),&:nth-child(6){
+			margin:0 0 0 20px;
+			@media(max-width: $md3){
+			flex:1 0 100%;
+			margin:0 0 0 5%;
+			}
+		}
+		&::before{
+			content:"Тумба под телевизор";
+			@include flexbox();
+			align-items: center;
+			font-size: 16px;
+			color:#FFFFFF;
+			width:100%;
+			height: 11.5%;
+			background: url('../img/icons/arrow.svg') no-repeat;
+			background-position: 95.2% 50%;
+			background-color: rgba(33, 37, 41, 0.50);
+			position:absolute;
+			top:88.5%;
+			left:0;
+			padding: 0 0 0 20px;
+			z-index: 2;
+			@include grow(0,bottom, 0.2s, 0s);
+			@media(max-width: $md4){
+			padding: 0 0 0 3px;
+			font-size: 12px;
+			}
+		}
+		&:hover{
+			&::before{
+			@include grow(1,bottom, 0.2s, 0s);
+			}
+		}		
+		img{
+			max-width: 100%;
+			object-fit: cover;
+			&:hover{
+			@include scale(1.1);
+			@include anim(0.45s,0s);
+			}
+		}
+	}
+}
+
+//<Reviewblock>
+.reviewblock {
+	margin: 0 0 120px 0;
+	@media(max-width: $md3){
+			margin: 0 0 85px 0;
+		}
+	@media(max-width: $md3){
+			margin: 0 0 30px 0;
+	}
+	&__body {
+	}
+	&__title {
+		font-size: 48px;
+		margin: 0 0 34px 0;
+		@media(max-width: $md4){
+			font-size: 28px;
+			margin: 0 0 22px 0;
+		}
+	}
+	&__content {
+		@include flexbox();
+		justify-content: space-between;
+		@media(max-width: $md1){
+			flex-wrap: wrap;
+		}
+		@media(max-width: $md3){
+			flex-direction: column;
+		}
+	}
+	&__review {
+		@include flexbox();
+		flex-direction:column;
+		align-items: center;
+		border: 1px solid #000;
+		background: #FFF;
+		width: 32.2%;
+		@media(max-width: $md1){
+			width: 47%;
+			margin:0 0 16px 16px;
+		}
+		@media(max-width: $md3){
+			width: 80%;
+			margin: 0 0 16px 0;
+		}
+		@media(max-width: $md4){
+			width: 94%;
+		}
+	}
+	&__item {
+		margin:40px 0 38px;
+		@media(max-width: $md4){
+			width: 32px;
+			height: 32px;
+			margin: 32px 0 38px;
+		}
+		img{
+			max-width: 100%;
+		}
+	}
+	&__name {
+		font-family: $helvbold;
+		font-size: 18px;
+		margin:0 0 18px 0;
+	}
+	&__text {
+		font-size: 16px;
+		line-height: 140%;
+		width: 80%;
+		margin:0 0 59px 0;
+		text-align: center;
+		@media(max-width: $md4){
+			min-height: 192px;
+			margin:0 0 10px 0;
+		}
+	}
+}
+
+//<Contactblock>
+.contactblock {
+	margin: 0 0 122px 0;
+	@media(max-width: $md2){
+		margin: 0 0 82px 0;
+	}
+	@media(max-width: $md4){
+		margin: 0 0 62px 0;
+	}
+	&__body {
+		@include flexbox();
+		@media(max-width: $md1){
+			flex-direction: column;
+		}
+	}
+	&__img {
+		width: 50%;
+		@media(max-width: $md1){
+			width: 100%;
+			margin: 0 0 50px 0;
+		}
+		@media(max-width: $md3){
+			display:none;
+		}
+		img{
+			max-width: 100%;
+		}
+	}
+	&__content {
+		width: 45%;
+		margin: 12px 0 0 5px;
+		@media(max-width: $md1){
+			width:60%;
+		}
+		@media(max-width: $md2){
+			width:70%;
+		}
+		@media(max-width: $md3){
+			width:100%;
+		}
+	}
+	&__title {
+		font-size: 48px;
+		margin: 0 0 38px 0;
+		@media(max-width: $md3){
+			margin: 0 0 20px 0;
+			font-size: 38px;
+		}
+		@media(max-width: $md4){
+			font-size: 28px;
+		}
+	}
+	&__subtitle {
+		font-size: 16px;
+		line-height: 140%;
+		margin: 0 0 74px 0;
+		@media(max-width: $md3){
+			margin: 0 0 32px 0;
+		}
+	}
+	&__form {
+		button{
+			font-size: 16px;
+		    line-height: 140%;
+		    color:#FFF;
+		    padding: 12px 20px;
+		    display: inline-flex;
+		    justify-content: center;
+			align-items: center;
+			background-color: #212529;
+			margin: 0 0 40px 0;
+			@media(max-width: $md3){
+			margin: 0 0 28px 0;
+			}
+			&:hover{
+				color:#212529;
+				background-color: #DDD7C0;
+			}
+			&:active{
+				color:#212529;
+				background-color: #CBC6B2;
+			}
+		}
+	}
+	&__group {
+		@include flexbox();
+		flex-direction: column;
+		font-size: 16px;
+		line-height: 140%;
+		position:relative;
+		top:0;
+		left:0;
+		input{
+			border-bottom: 1px solid #212529;
+			width: 92%;
+			padding: 0 0 12px 3px;
+			margin: 0 0 20px 0;
+			&:focus{
+				border-bottom: 1px solid #DDD7C0;
+			}
+		}
+		label{
+			position: absolute;
+			top:30%;left:0;
+			&:nth-child(2){
+				top:0;
+			}
+			&:last-child{
+				top:62%;
+			}
+		}
+		
+	}
+	&__items {
+		a{
+			&:last-child{
+				margin: 0 0 0 10px;
+			}
+		}
+		img{
+			max-width: 100%;
+		}
+	}
+}
+//<Дополнительные классы для Contactblock>
+.hiddenlabel{
+	display: none;
+}
+
+//<Footerblock>
+
+.footerblock {
+	&__body{
+		@include flexbox();
+		justify-content: space-between;
+		align-items: flex-end;
+		margin: 0 0 16px 0;
+		@media(max-width: $md1){
+			flex-direction: column-reverse;
+			align-items: center;
+			text-align: center;
+		}
+	}
+	&__copyrigth {
+		font-size: 18px;
+		text-transform: uppercase;
+		p{
+			&:first-child{
+				margin: 0 0 10px 0;
+			}
+		}
+	}
+	&__policy {
+			font-size: 16px;
+			line-height: 140%;
+		a{
+			position: relative;
+			top:0; 
+			left:0;
+			@media(max-width: $md1){
+				@include flexbox();
+				font-size: 16px;
+				line-height: 140%;
+				flex-direction: column;
+			}
+			&:first-child{
+				@media(max-width: $md1){
+					margin: 0 0 8px 0;
+				}
+			}
+			&::before{
+			content:"";
+			width: 100%;
+			height: 1px;
+			background-color: #212529;
+			position:absolute;
+			top:20px;
+			left:0;
+			@include underline(0,right, 0.25s, 0s);
+			@media(max-width: $md3){
+				top:50px;
+			}
+			@media(max-width: $md4){
+				top:40px;
+			}
+		}
+			&:hover{
+				color: #DDD7C0;
+				&::before{
+					@include underline(1,left, 0.25s, 0s);
+					background-color: #DDD7C0;
+				}
+			}
+			&:active{
+				color:#CBC6B2;
+				&::before{
+					@include underline(1,left, 0.25s, 0s);
+					background-color: #CBC6B2;
+				}
+			}
+		}
+		span{
+			@media(max-width: $md1){
+				display: none;
+			}
+		}
+		@media(max-width: $md1){
+			margin: 0 0 25px 0;
+		}
+	}
+	&__social {
+		font-size: 18px;
+		text-transform: uppercase;
+		a{
+			position: relative;
+			top:0; 
+			left:0;
+			&:last-child{
+				margin: 0 0 0 38px;
+			}
+			&::before{
+			content:"";
+			width: 100%;
+			height: 1px;
+			background-color: #212529;
+			position:absolute;
+			top:20px;
+			left:0;
+			@include underline(0,right, 0.25s, 0s);
+			@media(max-width: $md3){
+				top:50px;
+			}
+			@media(max-width: $md4){
+				top:40px;
+			}
+		}
+			&:hover{
+				color: #DDD7C0;
+				&::before{
+					@include underline(1,left, 0.25s, 0s);
+					background-color: #DDD7C0;
+				}
+			}
+			&:active{
+				color:#CBC6B2;
+				&::before{
+					@include underline(1,left, 0.25s, 0s);
+					background-color: #CBC6B2;
+				}
+			}
+		}
+		@media(max-width: $md1){
+			margin: 0 0 25px 0;
+		}
+	}
+}
